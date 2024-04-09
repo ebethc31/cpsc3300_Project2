@@ -52,8 +52,20 @@ class Model{
             Registers.insert({"R7", 0}); 
             Registers.insert({"R8", 0});   
         }
+        int getRS();
+        int updateRS();
+        int getRD();
+        int updateRD();
+        int getRT();
+        int updateRT();
         string getOpcode();
         string updateOpcode();
+        string getInstrOp();
+        string updateInstrOp();
+        string getFuncFeild();
+        string updateFuncFeild();
+        string getDesiredALU();
+        string updateDesiredALU();
         enum getExceptableOpcodes();
         enum getRtypeFuncFields();
         vector<int> getPC();
