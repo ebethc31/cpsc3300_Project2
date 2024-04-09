@@ -6,9 +6,63 @@
 #include <fstream>
 #include <stdlib.h>
 #include <string>
+#include <map>
 using namespace std;
 
+class Model{
+    // Private Attributes
+    private:
+        int rd,rs,rt;
+        string opcode; // First 6 bits from instruction line
+        string InstrOp; // Translated opcode to assembly instruction
+        string funcField; // Last 6 bits from instruction line
+        string desiredALU; // Translated funcField into assembly instruction
 
+        enum exceptable_Opcodes{ // Should be used for translating opcode -> InstrOp
+        Rtype = 0b000000,
+        ADDI = 0b001000, 
+        BEQ = 0b000100,
+        LW =  0b100011,
+        SW = 0b101011,
+        J = 0b000010
+        };
+        enum RtypeFuncFields{ // Should be used for translating funcField -> desiredALU
+        ADD = 0b100000,
+        AND = 0b100100,
+        SUB = 0b100010,
+        OR = 0b100101,
+        SLT = 0b101010
+        };
+
+        // Storage parameters
+        vector<int> PC;
+        map<std::string, int> Registers;
+        map<std::string, int> Memory; 
+    // Public Functions
+    public:
+        Model(){
+            PC.assign(1, 0x00000000);
+            Registers.insert({"R0", 0});
+            Registers.insert({"R1", 0}); 
+            Registers.insert({"R2", 0}); 
+            Registers.insert({"R3", 0}); 
+            Registers.insert({"R4", 0}); 
+            Registers.insert({"R5", 0}); 
+            Registers.insert({"R6", 0});
+            Registers.insert({"R7", 0}); 
+            Registers.insert({"R8", 0});   
+        }
+        string getOpcode();
+        string updateOpcode();
+        enum getExceptableOpcodes();
+        enum getRtypeFuncFields();
+        vector<int> getPC();
+        map<std::string, int> getRegisters();
+        map<std::string, int> getMemory(); 
+}
+
+
+/*
 // Instruction Class
 class Instruction {
     public:
@@ -36,8 +90,6 @@ class Instruction {
         InstrOp getInstrOp();
         InstrOperation getInstrOperation();
 };
-
-/*
 // PC Class
 class PC
 {
