@@ -6,8 +6,57 @@
 #include <fstream>
 #include <stdlib.h>
 #include <string>
+#include <map>
+#include <vector>
 using namespace std;
 
+class Model{
+    // Private Attributes
+    private:
+        int rd,rs,rt;
+        std::string binInstruction;
+        std::string opcode; // First 6 bits from instruction line
+        std::string InstrOp; // Translated opcode to assembly instruction
+        std::string funcField; // Last 6 bits from instruction line
+        std::string desiredALU; // Translated funcField into assembly instruction
+
+        // Storage parameters
+        vector<int> PC;
+        map<std::string, int> Registers;
+        map<std::string, int> Memory; 
+    // Public Functions
+    public:
+        Model(){
+            PC.assign(1, 0x00000000);
+            Registers.insert({"R0", 0});
+            Registers.insert({"R1", 0}); 
+            Registers.insert({"R2", 0}); 
+            Registers.insert({"R3", 0}); 
+            Registers.insert({"R4", 0}); 
+            Registers.insert({"R5", 0}); 
+            Registers.insert({"R6", 0});
+            Registers.insert({"R7", 0});  
+        }
+        std::string getBinInstruction();
+        std::string getOpcode();
+        std::string getInstrOp();
+        std::string getFuncField();
+        std::string getDesiredALU();
+        vector<int> getPC();
+        map<std::string, int> getRegisters();
+        map<std::string, int> getMemory(); 
+        void updateBinInstruction(string);
+        void updateOpcode(string);
+        void updateInstrOp(string);
+        void updateFuncField(string);
+        void updateDesiredALU(string);
+        void updatePC(int);
+        void updateRegisters(string, int);
+        void updateMemory(string, int);
+};
+
+
+/*
 // Instruction Class
 class Instruction {
     public:
@@ -20,12 +69,14 @@ class Instruction {
         enum class InstrOp{loadWord, storeWord, branchEqual, Rtype};
         enum class InstrOperation{LW, SW, BEQ, ADD, SUB, AND, OR, SLT, ADDI, J};
 
+        // ADD ALU COUNTER
+
 
     // The public variables are all the things that are needed to find the ALU control input
     public:
         Instruction() = default;
-        Instruction(string instrct){
-            fullInstr = instrct;
+        Instruction(string instruct){
+            fullInstr = instruct;
         };
         
         string getOpcode();
@@ -33,7 +84,6 @@ class Instruction {
         InstrOp getInstrOp();
         InstrOperation getInstrOperation();
 };
-
 // PC Class
 class PC
 {
@@ -44,6 +94,11 @@ class PC
 // Register Class
 class Register
 {
+    private:
+        string regs[2][8] = {
+            {"R0","R1","R2","R3","R4","R5","R6","R7"},
+            {"0","0","0","0","0","0","0","0"}
+        };
     public:
         string instrOp;
         char regWrite;
@@ -107,6 +162,6 @@ class Memory
         };
 };
 
-
+*/
 
 #endif
