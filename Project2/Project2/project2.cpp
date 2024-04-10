@@ -1,6 +1,6 @@
-//#include "View.h"
-//#include "Model.h"
-//#include "Controller.h"
+#include "View.h"
+#include "Model.h"
+#include "Controller.h"
 #include <iostream>
 #include <stdio.h>
 #include <string>
@@ -12,7 +12,7 @@
 
 using namespace std;
 
-
+/*
 enum exceptable_Opcodes{
     Rtype = 0b000000,
     ADDI = 0b001000, 
@@ -29,17 +29,30 @@ enum RtypeFuncFields{
     OR = 0b100101,
     SLT = 0b101010
 };
+*/
 
 int main(int argc, char* argv[])
 {
-    // PC
-    int PC = 0x00000000;
+    Model m;
+    string binaryLine = "00000000010000110000100000100010";
 
-    // Register
-    string regs[2][8] = {
-            {"R0","R1","R2","R3","R4","R5","R6","R7"},
-            {"0","0","0","0","0","0","0","0"}
-        };
+    Controller c(m);
+
+    c.decode(binaryLine);
+
+
+
+
+
+
+
+
+
+
+
+
+    /****************************************/
+    /*
     //Find the opcode
     string binaryLine = "00000000010000110000100000100010";
     string opcode = binaryLine.substr(0,6);
@@ -108,39 +121,41 @@ int main(int argc, char* argv[])
         funcField = "XXXXXX";
         desiredALU = "SUB";
     }
-    /* ADD STUFF FOR J AND ADDI */
+    //ADD STUFF FOR J AND ADDI
+
 
     cout<< "function field: " << funcField << endl;
     cout<< "desired ALU: " << desiredALU << endl;
 
-    /* INSTRUCTION FORMAT */
+    // INSTRUCTION FORMAT 
     if(InstrOp == "Rtype"){
-        /* rd */
+        /* rd 
         string destination = binaryLine.substr(16,5);
         int destinationValue = stoi(destination, nullptr, 2);
-        cout << "rd: " << destination << endl;
-        /* rs */
+        cout << "rd: " << destinationValue << endl;
+        /* rs 
         string  rs = binaryLine.substr(6,5);
         int rsValue = stoi(rs, nullptr, 2);
-        cout << "rs: " << rs << endl;
-        /* rt */
+        cout << "rs: " << rsValue << endl;
+        /* rt 
         string rt = binaryLine.substr(11,5);
         int rtValue = stoi(rt, nullptr, 2);
-        cout << "rt: " << rt << endl;
+        cout << "rt: " << rtValue << endl;
     }
     else if(InstrOp == "LW" || InstrOp == "SW" || InstrOp == "BEQ"){
-        /* rs */
+        /* rs 
         string rs = binaryLine.substr(6,5);
         int rsValue = stoi(rs, nullptr, 2);
-        cout << "rs: " << rs << endl;
-        /* rt */
+        cout << "rs: " << rsValue << endl;
+        /* rt 
         string rt = binaryLine.substr(11,5);
         int rtValue = stoi(rt, nullptr, 2);
-        cout << "rt: " << rt << endl;
-        /* address */
+        cout << "rt: " << rtValue << endl;
+        /* address 
         string address = binaryLine.substr(16,5);
         cout << "address: " << address << endl;
     }
+
     /* ADD SOMETHING FOR J AND ADDI */
 
     /* REGISTER STUFF */

@@ -7,32 +7,18 @@
 #include <stdlib.h>
 #include <string>
 #include <map>
+#include <vector>
 using namespace std;
 
 class Model{
     // Private Attributes
     private:
-        int rd,rs,rt;
-        string opcode; // First 6 bits from instruction line
-        string InstrOp; // Translated opcode to assembly instruction
-        string funcField; // Last 6 bits from instruction line
-        string desiredALU; // Translated funcField into assembly instruction
-
-        enum exceptable_Opcodes{ // Should be used for translating opcode -> InstrOp
-        Rtype = 0b000000,
-        ADDI = 0b001000, 
-        BEQ = 0b000100,
-        LW =  0b100011,
-        SW = 0b101011,
-        J = 0b000010
-        };
-        enum RtypeFuncFields{ // Should be used for translating funcField -> desiredALU
-        ADD = 0b100000,
-        AND = 0b100100,
-        SUB = 0b100010,
-        OR = 0b100101,
-        SLT = 0b101010
-        };
+        int rd,rs,rt, address;
+        std::string binInstruction;
+        std::string opcode; // First 6 bits from instruction line
+        std::string InstrOp; // Translated opcode to assembly instruction
+        std::string funcField; // Last 6 bits from instruction line
+        std::string desiredALU; // Translated funcField into assembly instruction
 
         // Storage parameters
         vector<int> PC;
@@ -49,29 +35,25 @@ class Model{
             Registers.insert({"R4", 0}); 
             Registers.insert({"R5", 0}); 
             Registers.insert({"R6", 0});
-            Registers.insert({"R7", 0}); 
-            Registers.insert({"R8", 0});   
+            Registers.insert({"R7", 0});  
         }
-        int getRS();
-        int updateRS();
-        int getRD();
-        int updateRD();
-        int getRT();
-        int updateRT();
-        string getOpcode();
-        string updateOpcode();
-        string getInstrOp();
-        string updateInstrOp();
-        string getFuncFeild();
-        string updateFuncFeild();
-        string getDesiredALU();
-        string updateDesiredALU();
-        enum getExceptableOpcodes();
-        enum getRtypeFuncFields();
+        std::string getBinInstruction();
+        std::string getOpcode();
+        std::string getInstrOp();
+        std::string getFuncField();
+        std::string getDesiredALU();
         vector<int> getPC();
         map<std::string, int> getRegisters();
         map<std::string, int> getMemory(); 
-}
+        void updateBinInstruction(string);
+        void updateOpcode(string);
+        void updateInstrOp(string);
+        void updateFuncField(string);
+        void updateDesiredALU(string);
+        void updatePC(int);
+        void updateRegisters(string, int);
+        void updateMemory(string, int);
+};
 
 
 /*

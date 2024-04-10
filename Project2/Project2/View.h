@@ -11,6 +11,7 @@ using namespace std;
 
 class View{
     public:
+        View() = default;
         void showInstruction();
 };
 
