@@ -13,7 +13,9 @@ using namespace std;
 class Model{
     // Private Attributes
     private:
-        int rd,rs,rt;
+        int rd,rs,rt, address, numOfCylces, 
+        numPCUpdates, numRegisterUpdates, numMemoryUpdates,
+        numALUUpdates;
         std::string binInstruction;
         std::string opcode; // First 6 bits from instruction line
         std::string InstrOp; // Translated opcode to assembly instruction
@@ -30,13 +32,17 @@ class Model{
             PC.assign(1, 0x00000000);
             Registers.insert({"R0", 0});
             Registers.insert({"R1", 0}); 
-            Registers.insert({"R2", 0}); 
+            Registers.insert({"R2", 5}); 
             Registers.insert({"R3", 0}); 
             Registers.insert({"R4", 0}); 
             Registers.insert({"R5", 0}); 
             Registers.insert({"R6", 0});
             Registers.insert({"R7", 0});  
         }
+        int getRD();
+        int getRS();
+        int getRT();
+        int getAddress();
         std::string getBinInstruction();
         std::string getOpcode();
         std::string getInstrOp();
@@ -45,6 +51,10 @@ class Model{
         vector<int> getPC();
         map<std::string, int> getRegisters();
         map<std::string, int> getMemory(); 
+        void updateRD(int);
+        void updateRS(int);
+        void updateRT(int);
+        void updateAddress(int);
         void updateBinInstruction(string);
         void updateOpcode(string);
         void updateInstrOp(string);

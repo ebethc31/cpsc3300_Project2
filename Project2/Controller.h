@@ -14,9 +14,9 @@ using namespace std;
 class Controller{
     public:
         Controller() = default;
-        Controller(Model m);
+        Controller(Model m) : m(m){}
         void decode(string);
-        //void execute();
+        void execute();
         //void save();
 
     private:

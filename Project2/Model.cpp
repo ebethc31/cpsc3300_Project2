@@ -1,6 +1,22 @@
 #include "Model.h"
 
 /*Base Code*/
+int Model::getRD(){
+    return rd;
+};
+
+int Model::getRS(){
+    return rs;
+};
+
+int Model::getRT(){
+    return rt;
+};
+
+int Model::getAddress(){
+    return address;
+};
+
 string Model::getOpcode(){
     return opcode;
 };
@@ -11,11 +27,11 @@ string Model::getInstrOp(){
 
 string Model::getFuncField(){
     return funcField;
-}
+};
 
 string Model::getDesiredALU(){
     return desiredALU;
-}
+};
 
 vector<int> Model::getPC(){
     return PC;
@@ -31,6 +47,22 @@ map<string, int> Model::getMemory(){
 
 string Model::getBinInstruction(){
     return binInstruction;
+};
+
+void Model::updateRD(int x){
+    rd = x;
+};
+
+void Model::updateRS(int x){
+    rs = x;
+};
+
+void Model::updateRT(int x){
+    rt = x;
+};
+
+void Model::updateAddress(int x){
+    address = x;
 };
 
 void Model::updateBinInstruction(string instruction){
