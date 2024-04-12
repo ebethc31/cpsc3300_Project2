@@ -1,6 +1,47 @@
 #include "Model.h"
 
 /*Base Code*/
+int Model::getRD(){
+    return rd;
+};
+
+int Model::getRS(){
+    return rs;
+};
+
+int Model::getRT(){
+    return rt;
+};
+
+int Model::getAddress(){
+    return address;
+};
+
+int Model::getNumCycles()
+{
+    return numOfCycles;
+}
+
+int Model::getNumPCUpdates()
+{
+    return numPCUpdates;
+}
+
+int Model::getNumRegisterUpdates()
+{
+    return numRegisterUpdates;
+}
+
+int Model::getNumMemoryUpdates()
+{
+    return numMemoryUpdates;
+}
+
+int Model::getNumALUArithOps()
+{
+    return numALUArithOps;
+}
+
 string Model::getOpcode(){
     return opcode;
 };
@@ -11,11 +52,11 @@ string Model::getInstrOp(){
 
 string Model::getFuncField(){
     return funcField;
-}
+};
 
 string Model::getDesiredALU(){
     return desiredALU;
-}
+};
 
 vector<int> Model::getPC(){
     return PC;
@@ -31,6 +72,22 @@ map<string, int> Model::getMemory(){
 
 string Model::getBinInstruction(){
     return binInstruction;
+};
+
+void Model::updateRD(int x){
+    rd = x;
+};
+
+void Model::updateRS(int x){
+    rs = x;
+};
+
+void Model::updateRT(int x){
+    rt = x;
+};
+
+void Model::updateAddress(int x){
+    address = x;
 };
 
 void Model::updateBinInstruction(string instruction){
@@ -58,12 +115,44 @@ void Model::updatePC(int newValue){
 };
 
 void Model::updateRegisters(string key, int value){
-    Registers.insert({key,value});
+    Registers[key] = value;
 };
 
 void Model::updateMemory(string key, int value){
-    Memory.insert({key,value});
+    // If the key given already exists overwrite the value. If it doesn't add it to the end of the map.
+    if(Memory.find(key)!= Memory.end()){
+        Memory[key] = value;
+    }
+    else{
+        Memory.insert({key,value});
+    }
+    
 };
+
+void Model::updateNumCycles()
+{
+    ++numOfCycles;
+}
+
+void Model::updateNumPCUpdates()
+{
+    ++numPCUpdates;
+}
+
+void Model::updateNumRegisterUpdates()
+{
+    ++numRegisterUpdates;
+}
+
+void Model::updateNumMemoryUpdates()
+{
+    ++numMemoryUpdates;
+}
+
+void Model::updateALUArithOps()
+{
+    ++numALUArithOps;
+}
 
 // Decode function
 //void decode(Instruction binaryInstr){};

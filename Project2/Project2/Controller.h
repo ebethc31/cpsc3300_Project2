@@ -12,17 +12,23 @@
 using namespace std;
 
 class Controller{
-    public:
-        Controller() = default;
-        Controller(Model m) : m(m){}
-        void decode(string);
-        //void execute();
-        //void save();
-
     private:
         Model m;
-        //const View& v;
+        View v;
+    public:
+        Controller() = default;
+        Controller(Model m, View v) : m(m), v(v){
+            this->m = m;
+            this->v = v;
+        }
+        void decode(string);
+        void execute();
+        void updateView();
+        //void save();
+
+    
 };
+
 
 
 #endif
