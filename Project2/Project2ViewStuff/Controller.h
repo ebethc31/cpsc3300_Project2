@@ -16,16 +16,17 @@ class Controller{
     public:
         Controller() = default;
 
-        Controller(Model m,  View v)
+        Controller(Model m, View view)
         {
             this->m = m;
             this->v = v;
         }
 
         void decode(string);
-        //void execute();
+        void execute();
         //void save();
-        void updateView();
+        Model incrementPC(Model);
+        void updateView(Model);
 
     private:
         Model m;

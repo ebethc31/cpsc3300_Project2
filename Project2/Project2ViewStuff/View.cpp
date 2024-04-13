@@ -30,6 +30,9 @@ void View::printLogicBlockStats(Model m)
 // Show the status of the PC
 void View::printPC(Model m)
 {
+
+    cout << "Last PC address check: " << m.getPC().back() << endl;
+
     cout << "PC:\n\n";
 
     vector<int> PCvec = m.getPC();

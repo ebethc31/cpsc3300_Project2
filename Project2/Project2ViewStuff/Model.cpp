@@ -2,36 +2,20 @@
 #include "Model.h"
 
 /*Base Code*/
-string Model::getOpcode(){
-    return opcode;
+int Model::getRD(){
+    return rd;
 };
 
-string Model::getInstrOp(){
-    return InstrOp;
+int Model::getRS(){
+    return rs;
 };
 
-string Model::getFuncField(){
-    return funcField;
-}
-
-string Model::getDesiredALU(){
-    return desiredALU;
-}
-
-vector<int> Model::getPC(){
-    return PC;
+int Model::getRT(){
+    return rt;
 };
 
-map<string, int> Model::getRegisters(){
-    return Registers;
-};
-
-map<string, int> Model::getMemory(){
-    return Memory;
-};
-
-string Model::getBinInstruction(){
-    return binInstruction;
+int Model::getAddress(){
+    return address;
 };
 
 int Model::getNumCycles()
@@ -59,6 +43,54 @@ int Model::getNumALUArithOps()
     return numALUArithOps;
 }
 
+string Model::getOpcode(){
+    return opcode;
+};
+
+string Model::getInstrOp(){
+    return InstrOp;
+};
+
+string Model::getFuncField(){
+    return funcField;
+};
+
+string Model::getDesiredALU(){
+    return desiredALU;
+};
+
+vector<int> Model::getPC(){
+    return PC;
+};
+
+map<string, int> Model::getRegisters(){
+    return Registers;
+};
+
+map<string, int> Model::getMemory(){
+    return Memory;
+};
+
+string Model::getBinInstruction(){
+    return binInstruction;
+};
+
+void Model::updateRD(int x){
+    rd = x;
+};
+
+void Model::updateRS(int x){
+    rs = x;
+};
+
+void Model::updateRT(int x){
+    rt = x;
+};
+
+void Model::updateAddress(int x){
+    address = x;
+};
+
 void Model::updateBinInstruction(string instruction){
     binInstruction = instruction;
 };
@@ -84,11 +116,18 @@ void Model::updatePC(int newValue){
 };
 
 void Model::updateRegisters(string key, int value){
-    Registers.insert({key,value});
+    Registers[key] = value;
 };
 
 void Model::updateMemory(string key, int value){
-    Memory.insert({key,value});
+    // If the key given already exists overwrite the value. If it doesn't add it to the end of the map.
+    if(Memory.find(key)!= Memory.end()){
+        Memory[key] = value;
+    }
+    else{
+        Memory.insert({key,value});
+    }
+    
 };
 
 void Model::updateNumCycles()

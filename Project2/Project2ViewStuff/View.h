@@ -7,21 +7,25 @@
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>
-#include "Controller.h"
+#include "Model.h"
 using namespace std;
 
 class View
 {
     public:
         View() = default;
-        View(Model);
-        void showInstruction();
-        void showInstruction();
+        View(Model m)
+        {
+            this->m = m;
+        }
+
         void printPC(Model);
         void printRegisters(Model);
         void printMemory(Model);
         void printLogicBlockStats(Model);
         void printBorder();
+    private:
+        Model m;
 };
 
 
